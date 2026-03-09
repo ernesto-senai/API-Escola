@@ -226,6 +226,24 @@ app.delete("/professores/:id", function (req, res) {
 });
 
 // Editar aluno ou professor
+app.put("/professores/:id", function (req, res) {
+  const id = parseInt(req.params.id);
+  const index = professores.findIndex((a) => a.id == id);
+
+  if (index === -1) {
+    return res.status(404).json("Professor não encontrado");
+  }
+
+  const nome = req.body.nome;
+  const disciplina = req.body.disciplina;
+  const anoContratacao = req.body.anoContratacao;
+
+  professores[indexDoProfessor].nome = nome;
+  professores[indexDoProfessor].disciplina = disciplina;
+  professores[indexDoProfessor].anoContratacao = anoContratacao;
+
+  return res.status(200).json(professores[indexDoProfessor]);
+});
 
 // Servidor
 app.listen(3000, function () {
